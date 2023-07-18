@@ -129,8 +129,8 @@
     <Compile Include="ChangeAddressForm.Designer.cs">
       <DependentUpon>ChangeAddressForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChromeDevToolsSystemMenu.cs" />
-    <Compile Include="ChromeUtils.cs" />
+    <Compile Include="Chrome\ChromeDevToolsSystemMenu.cs" />
+    <Compile Include="Chrome\ChromeUtils.cs" />
     <Compile Include="Demos\BootStrapForm.cs">
       <SubType>Form</SubType>
     </Compile>
