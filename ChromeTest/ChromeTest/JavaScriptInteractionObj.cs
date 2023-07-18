@@ -178,36 +178,7 @@ namespace ChromeTest
 
 
     }
-
-    public class BaseJsObj
-    {
-        /// <summary>
-        /// 反射方法
-        /// </summary>
-        /// <param name="path">{命名空间}/{类名}/{方法名}</param>
-        /// <param name="parm"></param>
-        public object Invoke(string path, object parm)
-        {
-            try
-            {
-                var namespaceStr = path.Split('/')[0];
-                var classStr = path.Split('/')[1];
-                var funcationStr = path.Split('/')[2];
-                Assembly assembly = Assembly.GetExecutingAssembly(); //获取包含当前代码的程序集 
-                object o = assembly.CreateInstance(namespaceStr + "." + classStr); //这里所述的完整类名指的是包括名称空间，即：名称空间.类名
-                ///获取方法
-                MethodInfo method_info = o.GetType().GetMethod(funcationStr,
-                                       BindingFlags.Public | BindingFlags.Instance);
-                //执行方法 object[]数组内为参数
-                if (parm == null || parm=="") { return method_info?.Invoke(o, new object[] { }); }
-                return method_info?.Invoke(o, new object[] { parm });
-            }
-            catch (Exception ex)
-            {
-                return ResultHelper.ToFail(ex.Message);
-            }
-        }
-    }
+     
     public class ResultHelper
     {
         public static ResponseResult ToResult(int code, string msg = "", object data = null)
