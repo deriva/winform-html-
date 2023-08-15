@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<!--gmp说明书-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>盘点单联查</title>
+    <link href="../../../lib/layui/css/layui.css" rel="stylesheet" />
+    <link href="../../../css/public.css" rel="stylesheet" />
+    <script src="../../../lib/jquery/jquery-2.1.3.min.js"></script>
+    <script src="../../../lib/layui/layui.js"></script>
+    <script src="../../../lib/artTemplate/template-simple.js"></script>
+    <script src="../../../js/common.js"></script>
+    <style type="text/css">
+        .layui-breadcrumb { padding: 5px 10px; height: 18px; line-height: 18px; display: block; }
+        .page { padding: 3px 10px; overflow: scroll; }
+        .bf { background-color: #fff; }
+        .ws-menu { min-height: 400px; background-color: white; position: fixed; left: 0; top: 0; z-index: 10; }
+        .rbmain{padding:5px 5px;}
+        .undis{display:none;}
+    </style>
+</head>
+<body>
+    <!--列表页-->
+    <div class="page  listpage"> 
+        <div class="layui-col-md12 bf rbmain">
+            <div id="cardIn">
+                <h2 class="tc">分页1</h2>
+                <form class="layui-form layui-form-pane undis" action="" id="fm" onclick="return false" >
+                    <div class="layui-form-item">
+
+                        <div class='layui-inline'>
+                            <label class='layui-form-label'>单号</label>
+                            <div class='layui-input-inline'>
+                                <input type='text' value='' class='layui-input' name="BillNo" />
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="button" class="btnprimary"
+                                    onclick="P.SearchPage1(0)">
+                                <i class="layui-icon"></i> 搜 索
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <!--列表页-->
+                    <div>
+                        <table class='layui-table'>
+                            <thead class='head'>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>单号</th>
+                                    <th>仓库</th>
+                                    <th>制单人</th>
+                                    <th>制单时间</th>
+                                    <th>备注</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listtable">
+                            </tbody>
+                        </table>
+                    </div>
+                    <script type="text/html" id="tpl_listtable">
+                        {{each lst as item }}
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td><a href="javascript:void(0)" onclick="P.Skip('{{item.ID}}',1)"> {{item.BillNo}}</a> </td>
+                            <td>{{item.WareName}}</td>
+                            <td>{{item.EName}}</td>
+                            <td>{{item.BDate}}</td>
+                            <td>{{item.Remark}}</td>
+                        </tr>
+                        {{/each}}
+                        {{if lst.length==0}}
+                        <tr>
+                            <td colspan="10" class="tc">
+                                暂无数据
+                            </td>
+                        </tr>
+                        {{/if}}
+                    </script>
+                    <div class='pagezone undis' id='pagezone'></div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div id="cardOut">
+                <h2 class="tc">分页2</h2>
+                <form class="layui-form layui-form-pane undis" action="" id="fm2" onclick="return false">
+                    <div class="layui-form-item">
+
+                        <div class='layui-inline'>
+                            <label class='layui-form-label'>单号</label>
+                            <div class='layui-input-inline'>
+                                <input type='text' value='' class='layui-input' bf-model='Search.DataRemark' name="BillNo" />
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="button" class="btnprimary"
+                                    onclick="P.SearchPage2(0)">
+                                <i class="layui-icon"></i> 搜 索
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <!--列表页-->
+                    <div>
+                        <table class='layui-table'>
+                            <thead class='head'>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>单号</th>
+                                    <th>仓库</th>
+                                    <th>制单人</th>
+                                    <th>制单时间</th>
+                                    <th>备注</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="listtable2">
+                            </tbody>
+                        </table>
+                    </div>
+                    <script type="text/html" id="tpl_listtable2">
+                        {{each lst as item }}
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td><a href="javascript:void(0)" onclick="P.Skip('{{item.ID}}',2)"> {{item.BillNo}}</a> </td>
+                            <td>{{item.WareName}}</td>
+                            <td>{{item.EName}}</td>
+                            <td>{{item.BDate}}</td>
+                            <td>{{item.Remark}}</td>
+
+
+                        </tr>
+                        {{/each}}
+                        {{if lst.length==0}}
+                        <tr>
+                            <td colspan="10" class="tc">
+                                暂无数据
+                            </td>
+                        </tr>
+                        {{/if}}
+                    </script>
+                    <div class='pagezone undis' id='pagezone2'></div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ban = {
+            data: {
+                BlockPage: {
+                    Page1: {//分页
+                        SearchUrl: "api/Page1/GetPageList",
+                        Lst: [],
+                        Search: {
+                            ID: "",  
+                            DataRemark: "",
+                            PageSize: 20,
+                            Page: 1
+                        }, //搜索条件
+                        fm: "fm",
+                        listtable: "listtable",
+                        pagezoneid: "pagezone",
+                        listtable: "listtable",
+                        searchcb: "P.HandData2"
+                    },
+                    Page2: {//分页
+                        SearchUrl: "api/Page12/GetPageList",
+                        Lst: [],
+                        Search: {
+                            ID: "",  
+                            DataRemark: "",
+                            PageSize: 20,
+                            Page: 1
+                        }, //搜索条件
+                        fm: "fm2",
+                        pagezoneid: "pagezone2",
+                        listtable: "listtable2",
+                        searchcb: "P.HandData2",
+                        listtable: "listtable2"
+                    }
+                },
+                Lst: [], //列表集合,
+                searchcb: "P.HandData",
+            }
+
+        }
+
+        var P = {
+            Init: () => {
+                P.InitUrlName();
+                if ($("#fm [name=BillNo]").val()) P.SearchPage1();
+                if ($("#fm2 [name=BillNo]").val()) P.SearchPage2();
+
+                var sel = document.querySelector('.page');
+                sel.style.height = window.innerHeight + "px";
+            },
+            //初始化url参数
+            InitUrlName: () => {
+                var parm = winformObj.GetUrlParm();
+                var data = LP.UrlToJson(parm);
+                if (data.OutBillNo) $("#fm2 [name=BillNo]").val(data.OutBillNo);
+                if (data.InBillNo) $("#fm [name=BillNo]").val(data.InBillNo);
+            },
+            SearchPage1: () => {
+                P.SearchData(0, ban.data.BlockPage.Page1);
+            },
+            SearchPage2: () => {
+                P.SearchData(0, ban.data.BlockPage.Page2);
+            },
+            //跳转打开页面
+            Skip: (id, type) => {
+                //通过winform打开出入库单据的编辑页
+                winformObj.FormParentRefresh({ event: "skip", id: id, type: type });
+                //关闭当前窗体
+                winformObj.CloseForm();
+            },
+            ///page:BlockPage.Page
+            SearchData: (changepage, page) => { //初始化搜索数据
+                var searchData = $("#" + page.fm).serializeJson();
+                for (var it in searchData) {
+                    page.Search[it] = searchData[it];
+                }
+                if (page.SearchUrl == undefined) return;
+                if (changepage == 0) {
+                    page.Search.Page = 1;
+                }
+                layer.closeAll();
+                page.Lst = [];
+                if (page.SearchUrl) {
+                    var layindex = layer.msg('正在努力加载中......', {
+                        icon: 16,
+                        shade: 0.21
+                    });
+                    var parm = LP.ParseParams(page.Search);
+                    var rd = winformObj.FeatchPageGet(page.SearchUrl + "?" + parm);
+                    layer.close(layindex);
+                    var r = JSON.parse(rd);
+                    var lst = []; page.Lst = lst;
+                    var totalCount = 0;
+                    layer.closeAll();
+                    if (r.code == 100) {
+                        lst = r.Items;
+                        totalCount = r.TotalCount;
+                        page.Lst = lst;
+                        if (page.searchcb) {
+                            try {
+                                eval(page.searchcb + "()");
+                            } catch (e) {
+                                console.log(e);
+                            }
+                        }
+                        P.ReaderData(page);
+                        P.ReaderPage(changepage, totalCount, page);
+                        if (page.lstreadercb) {//渲染后回调
+                            eval(page.lstreadercb + "()");
+                        }
+                    } else {
+                        P.ReaderData(page);
+                        P.ReaderPage(changepage, 0, page);
+                        if (!r.message) r.message = "暂无数据";
+
+                        if (page.searchcb) {
+                            try {
+                                eval(page.searchcb + "('" + JSON.stringify(r) + "')");
+                            } catch (e) {
+                                console.log(e);
+                            }
+                        }
+                    }
+
+                }
+            },
+            //渲染分页
+            ReaderPage: (changepage, totalcount, page) => {
+                if (changepage == 0) {
+                    layui.use('laypage', function () {
+                        var laypage = layui.laypage;
+                        laypage.render({
+                            elem: page.pagezoneid, //分页容器的id
+                            count: totalcount, //数据总数
+                            limit: page.Search.PageSize, //每页显示的数据条数
+                            theme: '#1E9FFF', //自定义选中色值
+                            layout: ['page', 'count'],
+                            jump: function (obj, first) {
+                                if (!first) {
+                                    page.Search.Page = obj.curr;
+                                    P.SearchData(1, page);
+                                }
+                            }
+                        });
+                    });
+                }
+            },
+            //渲染列表数据
+            ReaderData: (page) => {
+                LP.TmplReader({ lst: page.Lst }, 'tpl_' + page.listtable, page.listtable);
+            },
+        }
+
+        $(() => {
+            P.Init();
+        });
+
+    </script>
+</body>
+</html> 

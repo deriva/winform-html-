@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
+using ChromeTest.Ball;
 using ChromeTest.Demos;
 using System;
 using System.Collections.Generic;
@@ -32,13 +33,25 @@ namespace ChromeTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            OpenPage();
+            //var bj = "3,6,4,0,2,3,1,2,0,8,9,3,3,0,0,0,4,6,2,8,7,2,5,9,4,7,0,6,8,5,5,9,8,0,3,0,1,5,1,6,5,1,2,2,4,5,3,1,2,8,4,0,6,1,3,3,7,4,2,1,7,3,7,3,1,7,0,2,9,9,5,9,7,8,7,7,3,2,4,3,9,3,4,8,9,3,9,4,0,7,4,6,5,2,2,0,7,0,0,8,5,5,6,5,9,3,1,5,6,2,4,8,5,3,0,5,7,7,2,6,6,8,3,5,6,0,1,8,8,0,4,4,8,5,3,0,9,7,3,1,5,8,1,3,6,8,9,4,1,8,1,1,1,3,7,6,0,1,3,1,8,1,9,7,0,2,7,0,2,5,1,0,7,0,1,4,5,1,9,8,4,8,8,8,9,0,8,8,5,1,2,7,1,2,7,8,5,0,5,8,1,1,3,6,4,4,3,8,6,0,2,0,6,0,5,1,7,6,4,7,1,8,2,4,8,2,0,4,7,5,1,1,2,7,1,0,7,6,4,8,5,9,1,9,6,0,4,7,5,2,4,3,6,6,0,8,8,2,5,0,2,1,2,2,9,3,5,1,5,8,2,1,7,6,9,8,1,3,3,3,6,0,6,3,6,4,1,8,2,0";
+
+            //AlgorithmHelper.CalcLisahn2(bj);
+
+            //var tt = bj.Split(',').ToList();
+            //tt= tt.Skip(tt.Count - 250).ToList();
+            //AlgorithmHelper.FanTuiNext(0, string.Join(",", tt));
+        }
+        private void OpenWebSite()
+        {
             ChromeUtils.m_chromeBrowser = new ChromiumWebBrowser("http://www.maps.google.com");
 
             panel1.Controls.Add(ChromeUtils.m_chromeBrowser);
 
             ChromeDevToolsSystemMenu.CreateSysMenu(this);
-        }
 
+
+        }
 
         protected override void WndProc(ref Message m)
         {
@@ -234,15 +247,19 @@ namespace ChromeTest
 
         private void button1_Click(object sender, EventArgs e)
         {
+            OpenPage();
+        }
+        private void OpenPage()
+        {
             panel1.Controls.Remove(ChromeUtils.m_chromeBrowser);
 
-            var page = new Uri(string.Format("file:///{0}HTMLResources/html/Table.html", GetAppLocation()));
+            var page = new Uri(string.Format("file:///{0}HTMLResources/html/ball/fc.html", GetAppLocation()));
 
             ChromeUtils.m_chromeBrowser = new ChromiumWebBrowser(page.ToString());
 
             panel1.Controls.Add(ChromeUtils.m_chromeBrowser);
-             
-            var m_jsInteractionObj2 = new BaseJsObj(); 
+
+            var m_jsInteractionObj2 = new BaseJsObj();
             // Register the JavaScriptInteractionObj class with JS
             ChromeUtils.m_chromeBrowser.RegisterJsObject("winformObj", m_jsInteractionObj2, false);
         }

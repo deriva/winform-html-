@@ -1,10 +1,13 @@
 ﻿using CefSharp.WinForms;
-using Newtonsoft.Json.Linq;
+using ChromeTest.ApiClient;
+using ChromeTest.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
- 
+using System.Threading;
+using System.Windows.Forms;
 
 namespace ChromeTest
 {
@@ -34,11 +37,23 @@ namespace ChromeTest
         private int SYSMENU_CHROME_DEV_TOOLS = 0x1;
     }
 
+
     /// <summary>
     /// 基础的js对象
     /// </summary>
     public class BaseJsObj
     {
+
+        /// <summary>
+        /// 页面地址参数
+        /// </summary>
+        public string UrlParm { get; set; }
+
+        /// <summary>
+        /// 窗体名称
+        /// </summary>
+        public string FormName { get; set; }
+
         /// <summary>
         /// 反射方法
         /// </summary>
@@ -52,11 +67,10 @@ namespace ChromeTest
                 var namespaceStr = path.Split('/')[0];
                 var classStr = path.Split('/')[1];
                 var funcationStr = path.Split('/')[2];
-                Assembly assembly = Assembly.LoadFrom("ToothFacManage.dll"); //获取包含当前代码的程序集 
+                Assembly assembly = Assembly.LoadFrom("WareHouseNew.dll"); //获取包含当前代码的程序集 
                 object o = assembly.CreateInstance(namespaceStr + "." + classStr); //这里所述的完整类名指的是包括名称空间，即：名称空间.类名
-                 
+
                 var tt = new object[] { parm };
-        
                 ///获取方法
                 MethodInfo method_info = o.GetType().GetMethod(funcationStr,
                                        BindingFlags.Public | BindingFlags.Instance);
@@ -66,11 +80,129 @@ namespace ChromeTest
             }
             catch (Exception ex)
             {
-                return ResultHelper.ToFail(ex.Message);
+                return new ApiResult() { code = 101, message = ex.Message };
             }
         }
+        /// <summary>
+        /// get请求方法
+        /// </summary>
+        /// <param name="path">路径：api/xxx/asas?id=12</param> 
+        public ApiResult FeatchGet(string path)
+        {
+            try
+            {
+                return BaseApiClient.FeatchGet(path);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult() { code = 101, message = ex.Message };
+            }
+        }
+        /// <summary>
+        /// get分页请求方法
+        /// </summary>
+        /// <param name="path">路径：api/xxx/asas?id=12</param> 
+        public string FeatchPageGet(string path)
+        {
+            try
+            {
+                var r = BaseApiClient.BaseReq(path, "", "Get");
+                if (r.Item1 == 0) return JsonConvert.SerializeObject(new ApiPageResult<dynamic>() { code = 101, message = r.Item2 });
+                return r.Item2;
+
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new ApiPageResult<dynamic> { code = 101, message = ex.Message });
+            }
+        }
+        /// <summary>
+        /// post请求方法
+        /// </summary>
+        /// <param name="path">路径：api/xxx/asas?id=12</param> 
+        public ApiResult Featch(string path, Dictionary<string, object> parm)
+        {
+            try
+            {
+                var data = "";
+                if (parm != null) data = Newtonsoft.Json.JsonConvert.SerializeObject(parm);
+                return BaseApiClient.Featch(path, data);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResult() { code = 101, message = ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// 获取Url的参数
+        /// </summary> 
+        public object GetUrlParm()
+        {
+            return UrlParm;
+        }
+
+        /// <summary>
+        ///关闭窗体
+        /// </summary> 
+        public void CloseForm()
+        {
+            if (!string.IsNullOrWhiteSpace(FormName))
+            {
+                Form fm2 = null;
+                FormCollection formCollection = Application.OpenForms;
+                foreach (Form fm in formCollection)
+                {
+                    if (fm.Name == FormName)     //使用委托
+                    {
+                        fm2 = fm;                //创建委托、绑定委托、调用委托
+                        break;
+                    }
+                }
+                if (fm2 != null)
+                {
+                    Thread thread1 = new Thread(() =>
+                    {
+                        if (fm2.InvokeRequired)
+                            fm2.Invoke(new Action(() => { fm2.Close(); }));
+                        else fm2.Close();
+                    });
+                    thread1.Start();
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 指定的窗体刷新
+        /// </summary>
+        public void FormParentRefresh(Dictionary<string, object> parm = null)
+        {
+            if (!string.IsNullOrWhiteSpace(FormName))
+            {
+                Form fm2 = null;
+                FormCollection formCollection = Application.OpenForms;
+                foreach (Form fm in formCollection)
+                {
+                    if (fm.Name == FormName)     //使用委托
+                    {
+                        fm2 = fm;                //创建委托、绑定委托、调用委托
+                        break;
+                    }
+                }
+                if (fm2 != null)
+                {
+                    Thread thread1 = new Thread(() =>
+                    {
+                        var f3 = fm2 as frmChrome;
+                        f3.FormCallBackParent(parm);
+                    });
+                    thread1.Start();
+
+                }
+            }
+        }
+
     }
-
-
 
 }

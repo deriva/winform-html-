@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChromeTest</RootNamespace>
     <AssemblyName>ChromeTest</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -114,6 +114,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -123,6 +124,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiClent\Api\AllApi.cs" />
+    <Compile Include="ApiClent\Api\AllApiEx.cs" />
+    <Compile Include="ApiClent\Model\ApiResult.cs" />
+    <Compile Include="ApiClent\Module\BaseApiClient.cs" />
+    <Compile Include="ApiClent\Module\CommonClient.cs" />
+    <Compile Include="Ball\AlgorithmHelper.cs" />
     <Compile Include="ChangeAddressForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +162,12 @@
     <Compile Include="Demos\GenericHTMLForm.Designer.cs">
       <DependentUpon>GenericHTMLForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChrome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChrome.Designer.cs">
+      <DependentUpon>frmChrome.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +189,284 @@
     <Compile Include="TableForm.Designer.cs">
       <DependentUpon>TableForm.cs</DependentUpon>
     </Compile>
+    <Content Include="html\css\public.css" />
+    <Content Include="html\js\common.js" />
+    <Content Include="html\js\message.js" />
+    <Content Include="html\js\pagelist.js" />
+    <Content Include="html\lib\artTemplate\template-simple.js" />
+    <Content Include="html\lib\ban.min.js" />
+    <Content Include="html\lib\jquery\jquery-2.1.3.min.js" />
+    <Content Include="html\lib\layui\css\layui.css" />
+    <Content Include="html\lib\layui\font\iconfont.svg" />
+    <Content Include="html\lib\layui\layui.js" />
+    <Content Include="html\lib\polyfill.js" />
+    <Content Include="html\lib\ueditor\dialogs\anchor\anchor.html" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\attachment.css" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\attachment.html" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\attachment.js" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\alignicon.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\bg.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\file-icons.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\icons.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\icons.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\image.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\progress.png" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\success.gif" />
+    <Content Include="html\lib\ueditor\dialogs\attachment\images\success.png" />
+    <Content Include="html\lib\ueditor\dialogs\background\background.css" />
+    <Content Include="html\lib\ueditor\dialogs\background\background.html" />
+    <Content Include="html\lib\ueditor\dialogs\background\background.js" />
+    <Content Include="html\lib\ueditor\dialogs\background\images\bg.png" />
+    <Content Include="html\lib\ueditor\dialogs\background\images\success.png" />
+    <Content Include="html\lib\ueditor\dialogs\charts\chart.config.js" />
+    <Content Include="html\lib\ueditor\dialogs\charts\charts.css" />
+    <Content Include="html\lib\ueditor\dialogs\charts\charts.html" />
+    <Content Include="html\lib\ueditor\dialogs\charts\charts.js" />
+    <Content Include="html\lib\ueditor\dialogs\charts\images\charts0.png" />
+    <Content Include="html\lib\ueditor\dialogs\charts\images\charts1.png" />
+    <Content Include="html\lib\ueditor\dialogs\charts\images\charts2.png" />
+    <Content Include="html\lib\ueditor\dialogs\charts\images\charts3.png" />
+    <Content Include="html\lib\ueditor\dialogs\charts\images\charts4.png" />
+    <Content Include="html\lib\ueditor\dialogs\charts\images\charts5.png" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\emotion.css" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\emotion.html" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\emotion.js" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\0.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="html\lib\ueditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="html\lib\ueditor\dialogs\gmap\gmap.html" />
+    <Content Include="html\lib\ueditor\dialogs\help\help.css" />
+    <Content Include="html\lib\ueditor\dialogs\help\help.html" />
+    <Content Include="html\lib\ueditor\dialogs\help\help.js" />
+    <Content Include="html\lib\ueditor\dialogs\image\image.css" />
+    <Content Include="html\lib\ueditor\dialogs\image\image.html" />
+    <Content Include="html\lib\ueditor\dialogs\image\image.js" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\alignicon.jpg" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\bg.png" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\icons.gif" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\icons.png" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\image.png" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\progress.png" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\success.gif" />
+    <Content Include="html\lib\ueditor\dialogs\image\images\success.png" />
+    <Content Include="html\lib\ueditor\dialogs\insertframe\insertframe.html" />
+    <Content Include="html\lib\ueditor\dialogs\internal.js" />
+    <Content Include="html\lib\ueditor\dialogs\link\link.html" />
+    <Content Include="html\lib\ueditor\dialogs\map\map.html" />
+    <Content Include="html\lib\ueditor\dialogs\map\show.html" />
+    <Content Include="html\lib\ueditor\dialogs\music\music.css" />
+    <Content Include="html\lib\ueditor\dialogs\music\music.html" />
+    <Content Include="html\lib\ueditor\dialogs\music\music.js" />
+    <Content Include="html\lib\ueditor\dialogs\preview\preview.html" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\addimg.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\brush.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\delimg.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\empty.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\eraser.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\redo.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\redoH.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\scale.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\size.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\undo.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\images\undoH.png" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\scrawl.css" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\scrawl.html" />
+    <Content Include="html\lib\ueditor\dialogs\scrawl\scrawl.js" />
+    <Content Include="html\lib\ueditor\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="html\lib\ueditor\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="html\lib\ueditor\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="html\lib\ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="html\lib\ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="html\lib\ueditor\dialogs\table\dragicon.png" />
+    <Content Include="html\lib\ueditor\dialogs\table\edittable.css" />
+    <Content Include="html\lib\ueditor\dialogs\table\edittable.html" />
+    <Content Include="html\lib\ueditor\dialogs\table\edittable.js" />
+    <Content Include="html\lib\ueditor\dialogs\table\edittd.html" />
+    <Content Include="html\lib\ueditor\dialogs\table\edittip.html" />
+    <Content Include="html\lib\ueditor\dialogs\template\config.js" />
+    <Content Include="html\lib\ueditor\dialogs\template\images\bg.gif" />
+    <Content Include="html\lib\ueditor\dialogs\template\images\pre0.png" />
+    <Content Include="html\lib\ueditor\dialogs\template\images\pre1.png" />
+    <Content Include="html\lib\ueditor\dialogs\template\images\pre2.png" />
+    <Content Include="html\lib\ueditor\dialogs\template\images\pre3.png" />
+    <Content Include="html\lib\ueditor\dialogs\template\images\pre4.png" />
+    <Content Include="html\lib\ueditor\dialogs\template\template.css" />
+    <Content Include="html\lib\ueditor\dialogs\template\template.html" />
+    <Content Include="html\lib\ueditor\dialogs\template\template.js" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\bg.png" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\file-icons.gif" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\file-icons.png" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\icons.gif" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\icons.png" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\image.png" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\progress.png" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\success.gif" />
+    <Content Include="html\lib\ueditor\dialogs\video\images\success.png" />
+    <Content Include="html\lib\ueditor\dialogs\video\video.css" />
+    <Content Include="html\lib\ueditor\dialogs\video\video.html" />
+    <Content Include="html\lib\ueditor\dialogs\video\video.js" />
+    <Content Include="html\lib\ueditor\dialogs\webapp\webapp.html" />
+    <Content Include="html\lib\ueditor\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="html\lib\ueditor\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="html\lib\ueditor\dialogs\wordimage\tangram.js" />
+    <Content Include="html\lib\ueditor\dialogs\wordimage\wordimage.html" />
+    <Content Include="html\lib\ueditor\dialogs\wordimage\wordimage.js" />
+    <Content Include="html\lib\ueditor\lang\en\en.js" />
+    <Content Include="html\lib\ueditor\lang\en\images\addimage.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\background.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\button.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\copy.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\deletedisable.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\deleteenable.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\listbackground.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\localimage.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\music.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="html\lib\ueditor\lang\en\images\upload.png" />
+    <Content Include="html\lib\ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="html\lib\ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="html\lib\ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="html\lib\ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="html\lib\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="html\lib\ueditor\themes\default\css\ueditor.css" />
+    <Content Include="html\lib\ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="html\lib\ueditor\themes\default\dialogbase.css" />
+    <Content Include="html\lib\ueditor\themes\default\images\anchor.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\arrow.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\charts.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\filescan.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\icons.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\icons.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\loaderror.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\loading.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\lock.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\scale.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\sortable.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\spacer.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\upload.png" />
+    <Content Include="html\lib\ueditor\themes\default\images\videologo.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\word.gif" />
+    <Content Include="html\lib\ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="html\lib\ueditor\themes\iframe.css" />
+    <Content Include="html\lib\ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="html\lib\ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\highcharts-more.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\highcharts.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\highcharts.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\annotations.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\data.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\data.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\exporting.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\funnel.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\map.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\map.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\themes\gray.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\themes\grid.js" />
+    <Content Include="html\lib\ueditor\third-party\highcharts\themes\skies.js" />
+    <Content Include="html\lib\ueditor\third-party\jquery-1.10.2.js" />
+    <Content Include="html\lib\ueditor\third-party\jquery-1.10.2.min.js" />
+    <Content Include="html\lib\ueditor\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="html\lib\ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="html\lib\ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="html\lib\ueditor\third-party\video-js\font\vjs.svg" />
+    <Content Include="html\lib\ueditor\third-party\video-js\video-js.css" />
+    <Content Include="html\lib\ueditor\third-party\video-js\video-js.min.css" />
+    <Content Include="html\lib\ueditor\third-party\video-js\video-js.swf" />
+    <Content Include="html\lib\ueditor\third-party\video-js\video.dev.js" />
+    <Content Include="html\lib\ueditor\third-party\video-js\video.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\Uploader.swf" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.css" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.min.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="html\lib\ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="html\lib\ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="html\lib\ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="html\lib\ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="html\lib\ueditor\ueditor.all.js" />
+    <Content Include="html\lib\ueditor\ueditor.all.min.js" />
+    <Content Include="html\lib\ueditor\ueditor.config.js" />
+    <Content Include="html\lib\ueditor\ueditor.parse.js" />
+    <Content Include="html\lib\ueditor\ueditor.parse.min.js" />
+    <Content Include="html\page\apitest.html" />
+    <Content Include="html\page\test1.html" />
     <EmbeddedResource Include="ChangeAddressForm.resx">
       <DependentUpon>ChangeAddressForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Demos\GenericHTMLForm.resx">
       <DependentUpon>GenericHTMLForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChrome.resx">
+      <DependentUpon>frmChrome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -208,6 +502,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="HTMLResources\html\amChartExample.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTMLResources\html\ball\fc.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="HTMLResources\html\table2.html">
@@ -286,6 +583,14 @@
       <DependentUpon>TableForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="HTMLResources\js\bubbles\index.php" />
+    <None Include="html\lib\layui\font\iconfont.eot" />
+    <None Include="html\lib\layui\font\iconfont.ttf" />
+    <None Include="html\lib\layui\font\iconfont.woff" />
+    <None Include="html\lib\layui\font\iconfont.woff2" />
+    <None Include="html\lib\ueditor\third-party\jquery-1.10.2.min.map" />
+    <None Include="html\lib\ueditor\third-party\video-js\font\vjs.eot" />
+    <None Include="html\lib\ueditor\third-party\video-js\font\vjs.ttf" />
+    <None Include="html\lib\ueditor\third-party\video-js\font\vjs.woff" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -351,10 +656,20 @@
     <Content Include="HTMLResources\libs\bootstrap\js\npm.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="HTMLResources\libs\echart\echarts.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTMLResources\libs\echart\echarts.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HTMLResources\libs\echart\ecStat.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="HTMLResources\libs\jquery\jquery-2.1.3.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x86.3.2526.1362\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2526.1362\build\cef.redist.x86.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
