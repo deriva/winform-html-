@@ -11,6 +11,10 @@
     <AssemblyName>ChromeTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,12 +27,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -91,6 +91,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CefSharp, Version=51.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -108,6 +112,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CefSharp.WinForms.47.0.2\CefSharp\x86\CefSharp.WinForms.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v18.1, Version=18.1.18.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -130,6 +136,10 @@
     <Compile Include="ApiClent\Module\BaseApiClient.cs" />
     <Compile Include="ApiClent\Module\CommonClient.cs" />
     <Compile Include="Ball\AlgorithmHelper.cs" />
+    <Compile Include="Bind\Dep.cs" />
+    <Compile Include="Bind\TView.cs" />
+    <Compile Include="Bind\ViewBind.cs" />
+    <Compile Include="Bind\Watcher.cs" />
     <Compile Include="ChangeAddressForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +171,12 @@
     </Compile>
     <Compile Include="Demos\GenericHTMLForm.Designer.cs">
       <DependentUpon>GenericHTMLForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBind.Designer.cs">
+      <DependentUpon>frmBind.cs</DependentUpon>
     </Compile>
     <Compile Include="frmChrome.cs">
       <SubType>Form</SubType>
@@ -481,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Demos\GenericHTMLForm.resx">
       <DependentUpon>GenericHTMLForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBind.resx">
+      <DependentUpon>frmBind.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChrome.resx">
       <DependentUpon>frmChrome.cs</DependentUpon>
