@@ -70,7 +70,7 @@ namespace ChromeTest
             {
                 if (ex.Message.Contains("CefSharp.Core.dll") && ex.Message.Contains("加载"))
                 {
-                    MessageBox.Show("运行此页面需要下载:Visual C++ Redistributable Packages for Visual Studio 2013. 点击下载.下载安装后，重新运行【义齿软件】");
+                    MessageBox.Show("运行此页面需要下载:Visual C++ Redistributable Packages for Visual Studio 2013. 点击下载.下载安装后，重新运行");
                     System.Diagnostics.Process.Start("https://download.microsoft.com/download/F/3/5/F3500770-8A08-488E-94B6-17A1E1DD526F/vcredist_x86.exe");
                 }
                 else
